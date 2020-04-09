@@ -8,6 +8,6 @@ export class FruitsService {
   constructor(private http: HttpClient) {}
 
   getAll() {
-    return this.http.get('http://localhost:4000/fruits');
+    return this.http.get('http://localhost:8080/api/products');
   }
 }
