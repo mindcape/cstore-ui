@@ -1,0 +1,17 @@
+
+
+
+  <section class="product-area">
+    <h3>Cart</h3>
+
+    <div>
+      Cart Total: {{totalCartAmount | currency  }}
+
+      Cart Items: {{totalItems}}
+    </div>
+
+    <div class="product-list">
+      <app-product *ngFor="let product of cart" [product]="product"></app-product>
+    </div>
+  </section>
+

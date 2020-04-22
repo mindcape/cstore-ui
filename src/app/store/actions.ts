@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 
+
 interface Product {
   name: string;
   price: number;
@@ -11,7 +12,9 @@ export enum ActionTypes {
   Add = '[Product] Add to cart',
   Remove = '[Product] Remove from cart',
   LoadItems = '[Products] Load items from server',
-  LoadSuccess = '[Products] Load success'
+  LoadCartItems = 'Load Cart Items from cart',
+  LoadSuccess = '[Products] Load success',
+  LoadCartSuccess = '[Products] Load Cart Success'
 }
 
 export class AddToCart implements Action {
@@ -22,6 +25,10 @@ export class AddToCart implements Action {
 
 export class GetItems implements Action {
   readonly type = ActionTypes.LoadItems;
+}
+
+export class GetCartItems implements Action {
+  readonly type = ActionTypes.LoadCartItems;
 }
 
 export class RemoveFromCart implements Action {
@@ -36,4 +43,10 @@ export class LoadItems implements Action {
   constructor(public payload: Product[]) {}
 }
 
-export type ActionsUnion = AddToCart | RemoveFromCart | LoadItems | GetItems;
+export class LoadCartItems implements Action {
+  readonly type = ActionTypes.LoadCartSuccess;
+
+  constructor(public payload: Product[]) {}
+}
+
+export type ActionsUnion = AddToCart | RemoveFromCart | LoadItems | GetItems | LoadCartItems | GetCartItems;

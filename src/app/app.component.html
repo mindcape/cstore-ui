@@ -1,5 +1,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>
   <app-header></app-header>
-  <app-home></app-home>
 </div>
+<nav>
+  <a routerLink="/products" routerLinkActive="active">Home</a>
+  <a routerLink="/storeSelect" routerLinkActive="active">Change Store</a>
+  <a routerLink="/cart" routerLinkActive="active">Cart</a>
+  <a routerLink="/login" routerLinkActive="active">Login</a>
+  <!-- <a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Contact</a> -->
+</nav>
+
+
+
+<div [@routeAnimation]="getAnimationData(routerOutlet)">
+  <router-outlet #routerOutlet="outlet"></router-outlet>
+</div>
+<!-- <router-outlet name="popup"></router-outlet> -->

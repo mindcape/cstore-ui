@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8080;
 const fruits = require('./fruits');
 
 app.use(bodyParser.json());
@@ -16,7 +16,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/fruits', (req, res) => {
+app.get('/api/products', (req, res) => {
   res.json(fruits);
 });
 
