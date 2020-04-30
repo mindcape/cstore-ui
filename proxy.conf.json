@@ -6,5 +6,21 @@
         "pathRewrite" : {
             "^/api":"/api"
         }
-    }   
+    },  
+
+    "/pay/nothing":{
+        "target": "https://connect.squareupsandbox.com/v2",
+        "secure" : true,
+        "logLevel": "debug",
+        "pathRewrite" : {
+            "^/payments":"/payments"
+        }
+    },
+
+    "/donothin": {
+        "target": "https://connect.squareupsandbox.com/v2/payments",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+      }
 }

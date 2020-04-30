@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from '../page-not-found/page-not-found.componen
 
 
 
+
 const appRoutes: Routes = [
   { path: 'products', component: HomeComponent },
   { path: 'cart', component: CartComponent },

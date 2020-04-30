@@ -20,6 +20,9 @@ app.get('/api/products', (req, res) => {
   res.json(fruits);
 });
 
+
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
+
+

@@ -10,8 +10,27 @@
       Cart Items: {{totalItems}}
     </div>
 
+    <div *ngIf="totalItems>0">
+      <a routerLink="/checkout" routerLinkActive="active">Check-out</a>
+
+    </div>
+
     <div class="product-list">
-      <app-product *ngFor="let product of cart" [product]="product"></app-product>
+     
+
+
+      <div class="product" *ngFor="let product of cart">
+        <div class="product-image-holder">
+          <img src="/assets/images/apple-item.png" [alt]="product.product_name" class="product-image" />
+        </div>
+        <div class="product-details">
+          <p class="product-details__name">{{ product.product_name }}</p>
+          <p class="product-details__price">${{ product.price }}</p>
+        </div>
+        <div class="product-description">
+          <p>{{ product.description }}</p>
+        </div>
+      </div>
     </div>
   </section>
 

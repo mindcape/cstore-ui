@@ -12,7 +12,6 @@ import { ProductComponent } from './product/product.component';
 
 import { ShopReducer } from './store/reducer';
 import { ShopEffects } from './store/effects';
-import { CartComponent } from './cart/cart.component';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { Router } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
@@ -23,6 +22,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 import { FormsModule }    from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CartModule } from './cart/cart.module';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +32,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     ProductListComponent,
     ProductComponent,
-    CartComponent,
     LoginComponent,
     ChangeShopComponent,
     ListShopsComponent,
@@ -42,6 +42,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    CartModule,
     StoreModule.forRoot({ shop: ShopReducer }),
     EffectsModule.forRoot([ShopEffects]),
     AppRoutingModule,

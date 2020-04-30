@@ -4,7 +4,7 @@ import { EMPTY } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ActionTypes } from './actions';
 import { FruitsService } from '../fruits.service';
-import { CartService } from '../cart.service'
+// import { CartService } from '../cart.service'
 
 @Injectable()
 export class ShopEffects {
@@ -36,7 +36,7 @@ export class ShopEffects {
 
   constructor(
     private actions$: Actions,
-    private fruitsService: FruitsService,
-    private cartService : CartService
+    private fruitsService: FruitsService
+    //,private cartService : CartService
   ) {}
 }

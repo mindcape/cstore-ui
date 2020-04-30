@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CartService } from '../cart.service';
 import { Product } from '../product/product.component';
 import { select, Store } from '@ngrx/store';
 import { GetCartItems, LoadCartItems } from '../store/actions';
@@ -15,7 +14,7 @@ import { ProductListComponent } from '../product-list/product-list.component';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
 
@@ -23,6 +22,7 @@ export class CartComponent implements OnInit {
     store.pipe(select('shop')).subscribe(data => (this.cart = data.cart));
   }
 
+  inCart = true;
   cart: Product[] = [];
   totalCartAmount: number;
   totalItems : number;
