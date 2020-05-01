@@ -5,6 +5,7 @@ import { CartRoutingModule } from './cart-routing.module';
 import { CartComponent } from './cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PaymentComponent } from './payment/payment.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Import your library
 import { NgxStripeModule } from 'ngx-stripe';
@@ -19,6 +20,7 @@ import { NgxStripeModule } from 'ngx-stripe';
     CommonModule,
     CartRoutingModule,
     NgxStripeModule.forRoot('pk_test_XdzU7CWZLSGKaWaZ3Y5z4h3y00qf9g35KH'),
+    ReactiveFormsModule
   ]
 })
 export class CartModule { }
