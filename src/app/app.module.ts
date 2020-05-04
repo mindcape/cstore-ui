@@ -23,6 +23,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { FormsModule }    from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartModule } from './cart/cart.module';
+import { EntityDataModule } from '@ngrx/data';
+import { entityConfig } from './store/entity/entity-metadata';
 
 
 @NgModule({
@@ -46,6 +48,7 @@ import { CartModule } from './cart/cart.module';
     StoreModule.forRoot({ shop: ShopReducer }),
     EffectsModule.forRoot([ShopEffects]),
     AppRoutingModule,
+    EntityDataModule.forRoot(entityConfig),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PaymentService } from '../payment.service';
+import { Store, select } from '@ngrx/store';
+import { Product } from 'src/app/product/product.component';
 
 @Component({
   selector: 'app-checkout',
@@ -8,31 +10,20 @@ import { PaymentService } from '../payment.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private paymentService: PaymentService) { }
+  orderData = {
+    items: [{ id: "photo-subscription" }],
+    currency: "usd"
+  };
+
+  payIntent: String;
+
+  constructor(private paymentService: PaymentService, private store: Store<{ items: Product[]; cart:Product[]; initPay: String}>) {
+    store.pipe(select('shop')).subscribe(data => (this.payIntent = data.initPay));
+   }
 
   ngOnInit() {
-  }
-
-
-  submitPayment(){
-
-    const req = {
-      'idempotency_key': '1231231231',
-      'source_id': 'cnon:card-nonce-ok',
-      'accept_partial_authorization': false,
-      'autocomplete': false,
-      'order_id': '101010',
-      'amount_money': {
-        'amount': 11,
-        'currency': 'USD'
-      },
-      'billing_address' : {
-        'address_line_1': 'test',
-        'country': 'US'
-      }
-    };
-    this.paymentService.createPayment(req).subscribe(data => {
-      console.log(data);
+    this.paymentService.createStripePayIntent(this.orderData).subscribe(result=>{
+      
     });
   }
 

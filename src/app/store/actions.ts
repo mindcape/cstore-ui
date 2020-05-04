@@ -1,12 +1,8 @@
 import { Action } from '@ngrx/store';
+import { Product } from './models/Product';
 
 
-interface Product {
-  name: string;
-  price: number;
-  description: string;
-  image: string;
-}
+
 
 export enum ActionTypes {
   Add = '[Product] Add to cart',
@@ -14,7 +10,9 @@ export enum ActionTypes {
   LoadItems = '[Products] Load items from server',
   LoadCartItems = 'Load Cart Items from cart',
   LoadSuccess = '[Products] Load success',
-  LoadCartSuccess = '[Products] Load Cart Success'
+  LoadCartSuccess = '[Products] Load Cart Success',
+  AddPaymentInit = 'Payment Initiation',
+  LoadPaymentInit = 'Load Payment'
 }
 
 export class AddToCart implements Action {
@@ -49,4 +47,14 @@ export class LoadCartItems implements Action {
   constructor(public payload: Product[]) {}
 }
 
-export type ActionsUnion = AddToCart | RemoveFromCart | LoadItems | GetItems | LoadCartItems | GetCartItems;
+export  class AddPaymentInit implements Action {
+  readonly type = ActionTypes.AddPaymentInit;
+
+  constructor(public payload: String){}
+}
+
+export class LoadPaymentInit implements Action {
+  readonly type = ActionTypes.LoadPaymentInit;
+}
+
+export type ActionsUnion = AddToCart | RemoveFromCart | LoadItems | GetItems | LoadCartItems | GetCartItems | AddPaymentInit | LoadPaymentInit;

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, retry }  from 'rxjs/operators';
+import { TokenResult } from 'ngx-stripe';
 
 export class SqarePayment{
   payment: Payment;
@@ -52,14 +53,15 @@ export class AmountObject {
   currency : string;
 }
 
-export class PaymentRequest {
+export class PayRequest {
   amount_money : AmountObject;
-  idempotency_key: string;
-  source_id: string;
-  accept_partial_authorization: boolean;
-  autocomplete: boolean;
-  billing_address: BillingAddress;
+  token: TokenResult;
 }{};
+
+export class StripePayIntent {
+  items: any;
+  currency: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -70,14 +72,20 @@ export class PaymentService {
 
   }
 
-  createPayment(req: PaymentRequest) {
-    const headers = { 'Square-Version':'2020-04-22', 'Authorization':'Bearer EAAAEKFuADPoix81HqCNGDeuuLcPbJN_33i3xQ_5JubrkqROmEEa4ItrX4AqFylr',
-     'Content-Type':'application/json','Access-Control-Allow-Origin': '*'};
-    return this.http.post("https://connect.squareupsandbox.com/v2/payments",req,{headers});
+  completeSquarePayment(req: PayRequest) {
+    // const headers = { 'Square-Version':'2020-04-22', 'Authorization':'Bearer EAAAEKFuADPoix81HqCNGDeuuLcPbJN_33i3xQ_5JubrkqROmEEa4ItrX4AqFylr',
+    //  'Content-Type':'application/json','Access-Control-Allow-Origin': '*'};
+    const headers = {};
+    return this.http.post("/payment",req,{headers});
   }
 
   listPayment (){
 
+  }
+
+  createStripePayIntent(req: StripePayIntent){
+    const headers = {'Content-Type':'application/json','Access-Control-Allow-Origin': '*'};
+    return this.http.post("/api/payments/stripe",req,{headers});
   }
 
   

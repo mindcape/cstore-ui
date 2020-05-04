@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit, NgModule, ViewChild, ElementRef, ChangeDetectorRef} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { StripeService, Elements, Element as StripeElement, ElementsOptions } from "ngx-stripe";
+import { StripeService, Elements, Element as StripeElement, ElementsOptions, TokenResult, ConfirmPaymentIntentOptions } from "ngx-stripe";
+import { PaymentService,PayRequest } from '../payment.service';
 
 
 
@@ -11,10 +12,12 @@ import { StripeService, Elements, Element as StripeElement, ElementsOptions } fr
 })
 
 export class PaymentComponent implements OnInit{
- 
+
 
   elements: Elements;
   card: StripeElement;
+  token: TokenResult;
+  showCompletePayment: boolean;
  
   // optional parameters
   elementsOptions: ElementsOptions = {
@@ -25,7 +28,8 @@ export class PaymentComponent implements OnInit{
  
   constructor(
     private fb: FormBuilder,
-    private stripeService: StripeService) {}
+    private stripeService: StripeService,
+    private paymentService: PaymentService) {}
  
   ngOnInit() {
     this.stripeTest = this.fb.group({
@@ -54,21 +58,43 @@ export class PaymentComponent implements OnInit{
           this.card.mount('#card-element');
         }
       });
+      this.showCompletePayment = false;
   }
  
   buy() {
     const name = this.stripeTest.get('name').value;
+    //const amount = this.stripeTest.get('total').value;
     this.stripeService
       .createToken(this.card, { name })
       .subscribe(result => {
         if (result.token) {
           // Use the token to create a charge or a customer
           // https://stripe.com/docs/charges
-          console.log(result.token);
+          this.token = result;
+          console.log(this.token);
+          this.showCompletePayment=true;
         } else if (result.error) {
           // Error creating the token
+          this.showCompletePayment = false;
           console.log(result.error.message);
         }
       });
+  }
+
+  completePayment(){
+    // const name = this.stripeTest.get('name').value;
+    const amount = 100.00;
+    const options = {};
+    const payReq = new PayRequest();
+    //payReq.token = this.token;
+    //payReq.amount_money.amount=100.00;
+    //const paymentIntent: ConfirmPaymentIntentOptions;
+    console.log("In  complete");
+    this.stripeService.confirmPaymentIntent(this.token.token.id).subscribe(result => {
+      console.log("Payment  Intent Confirmation:  "+result);
+    });
+
+
+   // this.paymentService.completePayment(payReq);
   }
 }

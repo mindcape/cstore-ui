@@ -4,6 +4,7 @@ import { EMPTY } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ActionTypes } from './actions';
 import { FruitsService } from '../fruits.service';
+import { PaymentService } from '../cart/payment.service';
 // import { CartService } from '../cart.service'
 
 @Injectable()
@@ -34,9 +35,22 @@ export class ShopEffects {
   //   )
   // )
 
+  @Effect()
+  loadPayInit$ = this.actions$.pipe(
+    ofType(ActionTypes.LoadPaymentInit),
+    mergeMap((action) => 
+      this.paymentService.createStripePayIntent(action).pipe(
+        map( payIntent => {
+          return { type: ActionTypes.LoadPaymentInit, payload: payIntent};
+        }),
+        //catchError((err: Error) => of(new LoadPayInitError(err))),
+      )
+    )
+  )
+
   constructor(
     private actions$: Actions,
-    private fruitsService: FruitsService
-    //,private cartService : CartService
+    private fruitsService: FruitsService,
+    private paymentService : PaymentService
   ) {}
 }

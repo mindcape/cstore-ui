@@ -3,7 +3,8 @@ import { ActionsUnion, ActionTypes } from './actions';
 
 export const initialState = {
   items: [],
-  cart: []
+  cart: [],
+  initPay : String 
 };
 
 export function ShopReducer(state = initialState, action: ActionsUnion) {
@@ -32,9 +33,15 @@ export function ShopReducer(state = initialState, action: ActionsUnion) {
       return {
         ...state,
         cart: [...action.payload]
-      }
+      };
 
-    default:
-      return state;
+      case ActionTypes.AddPaymentInit:
+        console.log(...action.payload);
+        return {
+          ...state,
+          initPay : action.payload
+      };
+      default:
+        return state;
   }
 }
