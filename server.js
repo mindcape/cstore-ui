@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 8080;
 const fruits = require('./fruits');
+const carts = require('./carts');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,6 +19,10 @@ app.use((req, res, next) => {
 
 app.get('/api/products', (req, res) => {
   res.json(fruits);
+});
+
+app.get('/api/carts', (req, res) => {
+  res.json(carts);
 });
 
 

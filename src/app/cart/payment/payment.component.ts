@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit, NgModule, ViewChild, ElementRef, ChangeDetectorRef} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { StripeService, Elements, Element as StripeElement, ElementsOptions, TokenResult, ConfirmPaymentIntentOptions } from "ngx-stripe";
-import { PaymentService,PayRequest } from '../payment.service';
+import { PaymentService } from '../payment.service';
 
 
 
@@ -85,7 +85,7 @@ export class PaymentComponent implements OnInit{
     // const name = this.stripeTest.get('name').value;
     const amount = 100.00;
     const options = {};
-    const payReq = new PayRequest();
+    //const payReq = new PayRequest();
     //payReq.token = this.token;
     //payReq.amount_money.amount=100.00;
     //const paymentIntent: ConfirmPaymentIntentOptions;

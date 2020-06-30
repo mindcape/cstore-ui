@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PaymentService } from '../payment.service';
 import { Store, select } from '@ngrx/store';
-import { Product } from 'src/app/product/product.component';
+import { Observable } from 'rxjs';
+import { StorePayment } from 'src/app/store/models/storepayment';
 
 @Component({
   selector: 'app-checkout',
@@ -16,15 +17,19 @@ export class CheckoutComponent implements OnInit {
   };
 
   payIntent: String;
+  storePay$ : Observable<StorePayment[]>;
+  loading$: Observable<boolean>;
 
-  constructor(private paymentService: PaymentService, private store: Store<{ items: Product[]; cart:Product[]; initPay: String}>) {
-    store.pipe(select('shop')).subscribe(data => (this.payIntent = data.initPay));
+  constructor(private paymentService: PaymentService) {
+    this.storePay$ = paymentService.entities$;
+    this.loading$ = paymentService.loading$;
+    //store.pipe(select('shop')).subscribe(data => (this.payIntent = data.initPay));
    }
 
   ngOnInit() {
-    this.paymentService.createStripePayIntent(this.orderData).subscribe(result=>{
+    //this.paymentService.createStripePayIntent(this.orderData).subscribe(result=>{
       
-    });
-  }
+    };
+  
 
 }

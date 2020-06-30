@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../product/product.component';
-import { select, Store } from '@ngrx/store';
-import { GetCartItems, LoadCartItems } from '../store/actions';
-import { ProductListComponent } from '../product-list/product-list.component';
+import { Observable } from 'rxjs';
+import { Cart } from '../store/models/cart';
+import { CartService } from './cart.service';
+import { Product } from '../store/models/Product';
+
 
 // export class Cart {
 //   products : Product[];
@@ -18,8 +19,14 @@ import { ProductListComponent } from '../product-list/product-list.component';
 })
 export class CartComponent implements OnInit {
 
-  constructor(private store: Store<{ items: Product[]; cart:Product[] }>) {
-    store.pipe(select('shop')).subscribe(data => (this.cart = data.cart));
+  loading$: Observable<boolean>;
+  cart$: Observable<Cart[]>;
+  products$ : Observable<Product[]>;
+
+
+  constructor(private cartService: CartService) {
+    this.cart$ = cartService.entities$;
+    this.loading$ = cartService.loading$;
   }
 
   inCart = true;
@@ -27,10 +34,8 @@ export class CartComponent implements OnInit {
   totalCartAmount: number;
   totalItems : number;
 
-   
   ngOnInit() {
-    this.store.dispatch(new LoadCartItems(this.cart));
-    this.totalPrice();
+    //this.getCart();
   }
 
   totalPrice() {
@@ -42,6 +47,24 @@ export class CartComponent implements OnInit {
     });
     this.totalCartAmount = price;
     this.totalItems = items;
+  }
+
+
+ 
+  add(cart: Cart) {
+    this.cartService.add(cart);
+  }
+ 
+  delete(cart: Cart) {
+    this.cartService.delete(cart.id);
+  }
+ 
+  getCart() {
+    this.cartService.getAll();
+  }
+ 
+  update(cart: Cart) {
+    this.cartService.update(cart);
   }
 
 }
