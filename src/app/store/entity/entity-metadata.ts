@@ -4,10 +4,7 @@ const entityMetadata: EntityMetadataMap = {
   
   User: {},
   Product: {},
-  Cart : {    
-  },
   StorePayment: {},
-  CartItem: {},
   Customer:{}
 
 };

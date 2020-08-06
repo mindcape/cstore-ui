@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { ActionTypes } from './actions';
+import { ActionTypes } from './actions/actions';
 import { FruitsServiceService } from '../fruits.service';
 import { PaymentService } from '../cart/payment.service';
-// import { CartService } from '../cart.service'
+import { CartService } from '../cart/cart.service';
+import { AuthenticationService } from '../auth/authentication.service';
 
 @Injectable()
 export class ShopEffects {
@@ -24,11 +25,11 @@ export class ShopEffects {
 
   // @Effect()
   // loadCart$ = this.actions$.pipe(
-  //   ofType(ActionTypes.LoadCartSuccess),
+  //   ofType(ActionTypes.LoadCart),
   //   mergeMap(() => 
-  //     this.cartService.getCartItems().pipe(
-  //       map(fruits => {
-  //         return { type: ActionTypes.LoadSuccess, payload: fruits};
+  //     this.cartService.getCart(this.authService.currentUserValue.id,1).pipe(
+  //       map(cart => {
+  //         return { type: ActionTypes.LoadSuccess, payload: cart};
   //       }),
   //       catchError(() => EMPTY)
   //     )
@@ -51,6 +52,8 @@ export class ShopEffects {
   constructor(
     private actions$: Actions,
     private fruitsService: FruitsServiceService,
+    private cartService: CartService,
+    private authService: AuthenticationService,
     private paymentService : PaymentService
   ) {}
 }

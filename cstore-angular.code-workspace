@@ -4,7 +4,10 @@
 			"path": "."
 		},
 		{
-			"path": "/Users/nagadheeranreddyseelam/Projects/learn/angular-ngrx-data"
+			"path": "../direct-shop"
+		},
+		{
+			"path": "../../learn/todoapp"
 		}
 	],
 	"settings": {}

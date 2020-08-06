@@ -6,8 +6,8 @@
   <a routerLink="/products" routerLinkActive="active">Home</a>
   <a routerLink="/storeSelect" routerLinkActive="active">Change Store</a>
   <a routerLink="/cart" routerLinkActive="active">Cart</a>
-  <a routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn$ | async">Login</a>
-  <a class="nav-item nav-link" (click)="logout()" *ngIf="isLoggedIn$ | async">Logout</a>
+  <a routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn$">Login</a>
+  <a class="nav-item nav-link" (click)="logout()" *ngIf="isLoggedIn$">Logout</a>
   <!-- <li *ngIf="isLoggedIn$ | async"><a (click)="logout()">Logout</a></li> -->
   
   <!-- <a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Contact</a> -->

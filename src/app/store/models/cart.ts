@@ -1,13 +1,15 @@
 import { Product } from './Product';
+import { CartItem } from './CartItem';
 
 
 
 export class Cart {
-    constructor(
-      public readonly id: number,
-      public readonly custId: number,
-      public readonly storeId: number,
-      public readonly total: number
-    ) {}
-  }
+       readonly id: number;
+       readonly custId: number;
+       readonly storeId: number;
+       readonly total: number;
+       cartItems: CartItem[]= Array<CartItem>();  
+ }
   
+
+ 

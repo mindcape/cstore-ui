@@ -11,8 +11,6 @@ import { HeaderComponent } from './header/header.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductComponent } from './product/product.component';
 
-import { ShopReducer } from './store/reducer';
-import { ShopEffects } from './store/effects';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { Router } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -29,6 +27,8 @@ import { CartModule } from './cart/cart.module';
 import { EntityDataModule } from '@ngrx/data';
 import { entityConfig } from './store/entity/entity-metadata';
 import { RegisterComponent } from './register/register.component';
+import { CartEffects } from './store/effects/cart.effects';
+import { CartReducer } from './store/reducers/cart.reducer';
 
 
 @NgModule({
@@ -51,14 +51,10 @@ import { RegisterComponent } from './register/register.component';
     ReactiveFormsModule,
     HttpClientModule,
     CartModule,
-    StoreModule.forRoot({ shop: ShopReducer }),
-    EffectsModule.forRoot([ShopEffects]),
+    StoreModule.forRoot({ appState : CartReducer }),
+    EffectsModule.forRoot([CartEffects]),
     AppRoutingModule,
-    EntityDataModule.forRoot(entityConfig),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    }),
+    StoreDevtoolsModule.instrument(),
   ],
   providers: [],
   bootstrap: [AppComponent]

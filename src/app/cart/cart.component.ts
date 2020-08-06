@@ -3,14 +3,8 @@ import { Observable } from 'rxjs';
 import { Cart } from '../store/models/cart';
 import { CartService } from './cart.service';
 import { Product } from '../store/models/Product';
-
-
-// export class Cart {
-//   products : Product[];
-//   totalQuantity : number;
-//   totalAmount : number;
-// }
-
+import { CartItem } from '../store/models/CartItem';
+import { AuthenticationService } from '../auth/authentication.service';
 
 @Component({
   selector: 'app-cart',
@@ -20,17 +14,16 @@ import { Product } from '../store/models/Product';
 export class CartComponent implements OnInit {
 
   loading$: Observable<boolean>;
-  cart$: Observable<Cart[]>;
+  cart$: Observable<Cart>;
   products$ : Observable<Product[]>;
 
 
-  constructor(private cartService: CartService) {
-    this.cart$ = cartService.entities$;
-    this.loading$ = cartService.loading$;
+  constructor(private cartService: CartService,private authService: AuthenticationService) {
+    this.cart$ = cartService.cart$;
   }
 
   inCart = true;
-  cart: Product[] = [];
+  cart: Cart;
   totalCartAmount: number;
   totalItems : number;
 
@@ -41,30 +34,28 @@ export class CartComponent implements OnInit {
   totalPrice() {
     let price: number = 0;
     let items: number = 0;
-    this.cart.forEach((product:Product, index)=>{
-      price += product.price;
-      items += 1;
-    });
     this.totalCartAmount = price;
     this.totalItems = items;
   }
 
 
  
-  add(cart: Cart) {
-    this.cartService.add(cart);
+  add(cartItem: CartItem) {
+    this.cartService.addItemToCart(this.cart.id, cartItem);
   }
  
-  delete(cart: Cart) {
-    this.cartService.delete(cart.id);
-  }
+  // delete(cart: CartItem) {
+  //   this.cartService.delete(cart.id);
+  // }
  
   getCart() {
-    this.cartService.getAll();
+    this.cartService.getCart(this.authService.currentUserValue.id,1).subscribe((cart)=>{
+      this.cart = cart;
+    })
   }
  
-  update(cart: Cart) {
-    this.cartService.update(cart);
+  updateCart() {
+    this.cartService.update(this.cart);
   }
 
 }

@@ -6,8 +6,8 @@
   <div class="nav">
     <ul>
       <li>
-        <img src="/assets/images/shopping-bag.png" alt="cart" />
-        <span class="badge" *ngIf="cartItems?.length > 0">{{ cartItems.length }}</span>
+        <img src="/assets/images/shopping-bag.png" alt="cartItems" />
+        <span class="badge" *ngIf="cart | async">{{ cart?.cartItems?.length }}</span>
       </li>
     </ul>
   </div>

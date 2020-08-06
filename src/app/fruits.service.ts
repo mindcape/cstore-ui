@@ -6,13 +6,11 @@ import { EntityCollectionServiceBase, EntityCollectionServiceElementsFactory } f
 @Injectable({
   providedIn: 'root'
 })
-export class FruitsServiceService  extends EntityCollectionServiceBase<Product> {
-  //constructor(private http: HttpClient) {}
+export class FruitsServiceService   {
+  constructor(private http: HttpClient) {}
 
-  // getAll() {
-  //   return this.http.get('http://localhost:8080/api/products');
-  // }
-  constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
-    super('Product', serviceElementsFactory);
+  getAll() {
+    return this.http.get<Product[]>('http://localhost:8080/api/products');
   }
+
 }

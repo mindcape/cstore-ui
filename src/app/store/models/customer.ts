@@ -1,8 +1,6 @@
 export class Customer {
-    constructor(
-        id: number,
-        username: string,
-        email: string,
+        id: number
+        username: string
+        email: string
         password: string
-    ){}
 }

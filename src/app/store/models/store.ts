@@ -1,4 +1,4 @@
-export class Store{
+export class CStore{
     constructor(
         public readonly id: number,
         public readonly name:  string,

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { GetItems } from '../store/actions';
 import { Product } from '../store/models/Product';
 import { Observable } from 'rxjs';
 import { FruitsServiceService } from '../fruits.service';
@@ -13,15 +12,13 @@ import { FruitsServiceService } from '../fruits.service';
 })
 export class HomeComponent implements OnInit {
 
-  loading$: Observable<boolean>;
-  products$ : Observable<Product[]>;
+
 
   // constructor(private store: Store<{ items: Product[]; cart:Product[] }>) {
   //   store.pipe(select('shop')).subscribe(data => (this.items = data.items));
   // }
   constructor(private fruitService: FruitsServiceService) {
-    this.products$ = fruitService.entities$;
-    this.loading$ = fruitService.loading$;
+
   }
 
   items: Product[] = [];

@@ -1,9 +1,7 @@
 export class CartItem {
-    constructor(
-        public readonly id: number,
-        public readonly productId: number,
-        public readonly quantity: number,
-        public readonly itemPrice: number,
-        public readonly cartId: number
-    ){}
+         readonly id: number
+         readonly productId: number
+         readonly quantity: number
+         readonly itemPrice: number
+        //public readonly cartId: number
 }
